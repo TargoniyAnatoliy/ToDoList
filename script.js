@@ -4,6 +4,7 @@ let listInput = document.querySelector('#list-input');
 const addBtn = document.querySelector('#add-button');
 let list = document.querySelector('#list');
 let startMsg = document.querySelector('#start-message');
+let tasks = [];
 
 addBtn.addEventListener('click', addNewElementHandler);
 //додавання елемента при натисканні "Enter"
@@ -16,6 +17,7 @@ listInput.addEventListener('keydown', (e) => {
 //створюємо новий елемент у списку
 function addNewElementHandler() {
     let inputValue = listInput.value;
+    tasks.push(inputValue);
     let li = document.createElement('li');
     li.classList.add('list-item');
     let liText = document.createTextNode(inputValue);
@@ -24,7 +26,13 @@ function addNewElementHandler() {
         startMsg.hidden = true;
     }
 
-    (inputValue === '') ? alert('Can you write something?') : li.appendChild(liText);
+    if(inputValue === '') { 
+        alert('Can you write something?');
+        return;
+     } else { 
+        li.appendChild(liText);
+    }
+
     list.appendChild(li);
     listInput.value = '';
 
